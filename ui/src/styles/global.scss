@@ -1,0 +1,172 @@
+@import "colors";
+@import "../../node_modules/animate.css/animate.min.css";
+
+@mixin header {
+  line-height: 1.2em;
+  font-weight: 600;
+}
+
+@mixin pragmatic-input {
+  margin-top: 5px;
+  border-radius: 5px;
+  text-shadow: none;
+  color: $text-color !important;
+  -webkit-text-fill-color: $text-color;
+  background: white !important;
+  padding-left: 20px;
+}
+
+@mixin pragmatic-head {
+  text-align: left;
+  text-shadow: 3px 3px 3px #42424299;
+  line-height: 1;
+}
+
+@mixin pragmatic-sub-title {
+  font-size: 20px;
+  margin-bottom: 1em;
+}
+
+@mixin pragmatic-input-label {
+  font-size: 1em !important;
+  color: white !important;
+}
+
+.overlay-content {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.md-icon.md-theme-default.md-icon-image svg {
+  fill: $accent-blue
+}
+
+.input-w-select {
+  .md-input {
+    border-radius: 5px 0 0 5px;
+  }
+
+  .md-select {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.md-list-item-content {
+  background-color: white;
+}
+
+.md-focused, .md-has-value {
+  label {
+    @include pragmatic-input-label;
+    top: -10% !important;
+  }
+}
+
+.md-error {
+  @include pragmatic-input-label;
+  color: red !important;
+}
+
+.md-list-item-text {
+  color: $text-color !important;
+}
+
+.content {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 550px;
+  padding: 2em 0.5em;
+}
+
+.content-section {
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.header-1 {
+  @include header;
+  font-size: 3.5em;
+}
+
+.header-3 {
+  @include header;
+  font-size: 2.8em;
+}
+
+.header-3 {
+  @include header;
+  font-size: 2em;
+}
+
+.header-4 {
+  @include header;
+  font-size: 1.2em;
+}
+
+.accent {
+  color: $accent-blue;
+}
+
+label {
+  text-align: left;
+}
+
+.md-button.md-theme-default.md-raised:not([disabled]).md-accent {
+  text-shadow: none;
+  font-weight: 600;
+  margin: 0;
+  height: 32px;
+  background: #ff7400;
+}
+
+.default-content-position {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -35%);
+
+  @media (max-width: 812px) {
+    top: 12em;
+  }
+
+  @media (max-width: 500px) {
+    top: 10em;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+  }
+}
+
+.md-content {
+  justify-content: space-between;
+}
+
+.md-field.md-theme-default:not(.md-focused):not(.md-has-value) label {
+  z-index: 1000;
+  color: #42424299;
+  text-shadow: none !important;
+  top: 50%;
+  left: 20px;
+}
+
+.md-field.md-theme-default.md-has-value .md-input {
+  color: $text-color;
+  -webkit-text-fill-color: $text-color !important;
+}
+
+.md-field::after {
+  content: none;
+}
+
+#dropzone {
+  width: 100% !important;
+}

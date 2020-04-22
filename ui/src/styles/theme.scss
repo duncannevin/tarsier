@@ -1,0 +1,20 @@
+:root {
+  --md-theme-default-background: transparent !important;
+}
+
+@import url("https://fonts.googleapis.com/css?family=:400,700&display=swap");
+
+@import "colors";
+
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+@include md-register-theme(
+    "default",
+    (
+      primary: $primary-blue,
+      accent: $accent-blue,
+      theme: dark
+    )
+);
+
+@import "~vue-material/dist/theme/all"; // Apply the theme

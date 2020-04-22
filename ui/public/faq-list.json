@@ -1,0 +1,42 @@
+[
+  {
+    "category": "About Us",
+    "title": "Who are we?",
+    "value": "We provide a service to help property owners looking to sell their property in “AS-IS” condition without the need to do any repairs, listing with an agent, or do any staging. We currently service the Central Florida area, but  are expanding soon to the entire State. "
+  },
+  {
+    "category": "Process",
+    "title": "How do you come up with the offer?",
+    "value": "We keep the process very simple. We assess the current condition of your property, what similar properties in \"AS-IS\" condition in your area have recently sold for, the estimated repairs and calculate the offer."
+  },
+  {
+    "category": "Process",
+    "title": "Do you need to see the property in person?",
+    "value": "We have an inspection period where we provide a checklist of pictures and video you can submit or we can schedule an appointment to walk the property."
+  },
+  {
+    "category": "Process",
+    "title": "Are there any obligations?",
+    "value": "Absolutely not. As the property owner it’s entirely up to you if you decide to accept our offer and want to proceed."
+  },
+  {
+    "category": "Cost",
+    "title": "What are the fees?",
+    "value": "Our offer for the property is a net offer for the property \"AS-IS\" we pay all closing costs."
+  },
+  {
+    "category": "How to",
+    "title": "How soon can I sell?",
+    "value": "You tell us the timeline you want to sell and once there is an agreement in place, we are able to close within 14 to 30 days, this depends on how quickly title clears."
+  },
+  {
+    "category": "How to",
+    "title": "What if I want to just list my property?",
+    "value": "We have a network of licensed agents that we can refer that can help you list your property."
+  },
+  {
+    "category": "How to",
+    "title": "What other services do you offer?",
+    "value": "This of course will depend on your exact situation, but we are able provide creative solutions that may meet your needs."
+  }
+]

@@ -3,7 +3,7 @@ import * as config from 'config'
 
 @Injectable()
 export class ServerConfig {
-  private serverConf = config.get('server')
+  private serverConf: {host: string, name: string, port: string} = config.get('server')
 
   HOST: string = this.serverConf.host
   NAME: string = this.serverConf.name

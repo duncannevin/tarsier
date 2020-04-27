@@ -1,5 +1,5 @@
 import {Test, TestingModule} from '@nestjs/testing'
-import {SocketGateway} from './socket.controller'
+import {SocketGateway} from './socket.gateway'
 
 describe('Socket Controller', () => {
   let controller: SocketGateway

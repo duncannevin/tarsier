@@ -16,11 +16,11 @@ export class SocketGateway {
   }
 
   @SubscribeMessage('events')
-  findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
+  findAll(@MessageBody() data: any): Observable<WsResponse<string>> {
     this.logger.log(`Events received a message ${data}`)
     return from([1, 2, 3]).pipe(
       delay(500),
-      map(item => ({ event: 'events', data: item }))
+      map(item => ({ event: 'events', data: `${item}: ${data}` }))
     );
   }
 

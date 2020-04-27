@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {ServerConfigImpl} from './server.config.impl'
 import * as config from 'config'
 
 @Injectable()
-export class ServerConfig implements ServerConfigImpl {
+export class ServerConfig {
   private serverConf = config.get('server')
 
   HOST: string = this.serverConf.host

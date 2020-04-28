@@ -1,11 +1,11 @@
 import { Injectable, Logger, Scope } from '@nestjs/common'
 import * as fs from 'fs'
 import { bindCallback } from 'rxjs'
-
+import {TarsierLoggerImpl} from './tarsier.logger.impl'
 
 @Injectable({ scope: Scope.TRANSIENT })
-export class TarsierLogger extends Logger {
-  private readonly logLocation = '/var/log/pragmatic_gateway.log'
+export class TarsierLogger extends Logger implements TarsierLoggerImpl {
+  private readonly logLocation = '/var/log/tarsier.log'
 
   error(message: string) {
     this.doLog(message)

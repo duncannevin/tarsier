@@ -1,16 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as fs from 'fs'
 import { bindCallback } from 'rxjs'
-import {TarsierLoggerMock} from '../mocks/logger/tarsier.logger.mock'
-import {LoggerModuleMock} from '../mocks/logger/logger.module.mock'
+import {TarsierLogger} from './tarsier.logger'
 
 describe('LoggerService', () => {
   let appendFileSpy, bindCallbackSpy, service
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule(new LoggerModuleMock()).compile();
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [TarsierLogger],
+      exports: [TarsierLogger]
+    }).compile();
 
-    service = module.resolve<TarsierLoggerMock>(TarsierLoggerMock);
+    service = module.resolve<TarsierLogger>(TarsierLogger);
   });
 
   beforeEach(() => {

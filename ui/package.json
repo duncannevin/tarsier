@@ -9,6 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "resolutions": {
+    "is-promise": "2.1.0",
+    "run-async/is-promise": "2.1.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.3",

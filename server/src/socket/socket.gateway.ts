@@ -1,8 +1,18 @@
-import {MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse} from '@nestjs/websockets'
+import {
+  MessageBody,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+  WsException,
+  WsResponse
+} from '@nestjs/websockets'
 import {Server} from 'socket.io'
 import {from, Observable} from 'rxjs'
 import {delay, map} from 'rxjs/operators'
 import {TarsierLogger} from '../logger/tarsier.logger'
+import {InitializeDto} from './dto/initialize.dto'
+import {UsePipes} from '@nestjs/common'
+import {WsValidationPipe} from './pipe/ws.validation.pipe'
 
 @WebSocketGateway()
 export class SocketGateway {
@@ -13,6 +23,14 @@ export class SocketGateway {
     private logger: TarsierLogger
   ) {
     logger.setContext('SocketGateway')
+  }
+
+  @SubscribeMessage('initialize-environment')
+  @UsePipes(new WsValidationPipe())
+  initializeEnvironment(@MessageBody() initializeDto: InitializeDto) {
+    this.logger.log(`Initialize Environment Triggered: ${JSON.stringify(initializeDto)}`)
+
+    return initializeDto
   }
 
   @SubscribeMessage('events')

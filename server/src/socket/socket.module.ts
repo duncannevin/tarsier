@@ -1,11 +1,12 @@
 import {Module} from '@nestjs/common'
 import {SocketGateway} from './socket.gateway'
 import {LoggerModule} from '../logger/logger.module'
-import { SocketService } from './socket.service';
+import {EnvironmentModule} from '../environment/environment.module'
+import {EnvironmentService} from '../environment/environment.service'
 
 @Module({
-  imports: [LoggerModule],
-  providers: [SocketGateway, SocketService]
+  imports: [LoggerModule, EnvironmentModule],
+  providers: [SocketGateway, EnvironmentService]
 })
 export class SocketModule {
 }

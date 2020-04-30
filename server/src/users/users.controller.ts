@@ -4,13 +4,11 @@ import {User} from "./user.entity";
 import {Body} from "@nestjs/common/decorators/http/route-params.decorator";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {LoginUserDto} from "./dto/login-user.dto";
-import {AuthService} from "../auth/auth.service";
 
 @Controller('users')
 export class UsersController {
     constructor(
-        private usersService: UsersService,
-        private authService: AuthService
+        private usersService: UsersService
     ){}
 
     @Get()
@@ -36,7 +34,7 @@ export class UsersController {
     @Post('/login')
     login(@Body() loginUserDto: LoginUserDto): Promise<boolean> {
         return this.usersService.findByUsername(loginUserDto.username).then((user) => {
-            return this.authService.verifyPassword(loginUserDto.password, user.salt, user.password);
+            return user.verifyPassword(loginUserDto.password, user.salt, user.password);
         }).catch(() => false);
     }
 }

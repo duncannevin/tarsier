@@ -28,10 +28,10 @@
 
 ## Development
 
-> All development for this application is done within docker containers. The benifet being that
+> ~~All development for this application is done within docker containers. The benifet being that
 > you will be able to develop without an extensive setup on your machine. Since this application is 
 > built using micro-services this is the best approach to allow each service to be unique in it's
-> build.
+> build.~~
 
 #### Pre Reqs
 

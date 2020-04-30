@@ -37,8 +37,16 @@ export class User {
 
     private generateSalt = (): string => crypto.randomBytes(256).toString('hex');
 
-
     private generatePasswordHash = (password, salt): string => crypto.createHmac('sha256', salt).update(password).digest('hex');
 
     verifyPassword = (password, salt, passwordHash): boolean => this.generatePasswordHash(password, salt) === passwordHash;
+
+    getPublicInfo = (): object => {
+        return {
+            id: this.id.toString(),
+            username: this.username,
+            firstName: this.firstName,
+            lastName: this.lastName
+        };
+    }
 }

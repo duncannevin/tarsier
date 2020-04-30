@@ -39,4 +39,23 @@
 - [Nest Cli v7.1.2](https://docs.nestjs.com/cli/overview)
 - [Angular Cli v9.1.3](https://cli.angular.io/)
 
+#### Config
+> This is how to add a config. We are using the [config](https://www.npmjs.com/package/config) library for managing
+> configs. Along with this library we are making a class to define the configs in our application.
 
+1) In `server/config` add the config to the appropriate environment.
+2) Add a corresponding injectable  in `src/config` that defines the config.
+3) If you are adding a sensitive config please do not add an actual value to `server/config` instead do the following:
+  - ```yaml 
+    some-config-group:
+      aSensitive: "please add ${XYZ} to your environment"
+      anotherOne: "please add ${asdf} to your environment"
+    ```
+  - Then in `server/config/custom-environment-variables.yml` add the corresponding env variables, this will pull them from your environment: 
+    - ```
+        some-config-group:
+          aSensitive: XYZ
+          anotherOne: asdf
+      ```
+4) Add the values to your environment. You will need to do this in `/etc/environment` in order for Intellij to read them. You may also need to restart you laptop so Intellij can pull them in.
+5) No you should ready to consume your config as an injectable!

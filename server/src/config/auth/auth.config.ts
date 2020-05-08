@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common'
 import * as config from 'config'
 
+const serverConf: { secret: string } = config.get('auth')
+
 @Injectable()
 export class AuthConfig {
-  private serverConf: { secret: string } = config.get('auth')
-
-  SECRET = this.serverConf.secret
+  SECRET = serverConf.secret
 }

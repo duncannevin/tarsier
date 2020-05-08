@@ -38,6 +38,18 @@
 - [Node.js v12.12.0](https://nodejs.org/en/download/)
 - [Nest Cli v7.1.2](https://docs.nestjs.com/cli/overview)
 - [Angular Cli v9.1.3](https://cli.angular.io/)
+- [MongoDB v4.2.3](https://docs.mongodb.com/manual/installation/)
+
+#### Required Env Variables
+> Please set the following variable in your environment. You will need to set these in `/etc/environment` and restart
+> you laptop in order for IntelliJ to pick them up.
+
+```
+TARSIER_JWT_SECRET=<your secret>
+TARSIER_MONGO_PORT=27017 
+TARSIER_MONGO_USERNAME=<a username>
+TARSIER_MONGO_PW=<a password>
+```
 
 #### Config
 > This is how to add a config. We are using the [config](https://www.npmjs.com/package/config) library for managing

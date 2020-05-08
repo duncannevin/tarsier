@@ -1,4 +1,4 @@
-import {MiddlewareConsumer, Module} from '@nestjs/common'
+import {MiddlewareConsumer, Module, OnModuleInit} from '@nestjs/common'
 import {TypeOrmModule} from '@nestjs/typeorm'
 import {SocketModule} from './socket/socket.module'
 import {LoggerModule} from './logger/logger.module'

@@ -8,7 +8,9 @@ import {ConfigModule} from '../config/config.module'
 import {ServerConfig} from '../config/server/server.config'
 import {LoggerModule} from '../logger/logger.module'
 import {JwtStrategy} from './jwt.strategy'
-import {jwtConstants} from '../constants/jwt.constants'
+import {AuthConfig} from '../config/auth/auth.config'
+
+const authConfig = new AuthConfig()
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import {jwtConstants} from '../constants/jwt.constants'
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (serverConfig: ServerConfig) => ({
-        secret: jwtConstants.secret
+        secret: authConfig.SECRET
       }),
       inject: [ServerConfig]
     }),

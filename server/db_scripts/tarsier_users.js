@@ -1,21 +1,25 @@
+config = require('config')
 conn = new Mongo();
 
+mongoConfig = config.get('mongo')
+usersConfig = mongoConfig.users
+
 // Create the tarsier_users database if not already created
-db = conn.getDB('tarsier_users');
+db = conn.getDB(usersConfig.database);
 
 // Drop the existing user if already created
-print('Dropping User tarsier...');
-cursor = db.dropUser('tarsier');
+print('Dropping User ' + usersConfig.name + '...');
+cursor = db.dropUser(usersConfig.name);
 print(cursor);
 
 // Create the user that will be used to connect to the datasource
-print('Creating User tarsier...');
+print('Creating User ' + usersConfig.name + '...');
 db.createUser(
     {
-        user: 'tarsier',
-        pwd: 'tarsier',
+        user: usersConfig.name,
+        pwd: usersConfig.password,
         roles: [
-            { role: "readWrite", db: "tarsier_users" }
+            { role: "readWrite", db: usersConfig.database }
         ]
     }
 );

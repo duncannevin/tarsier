@@ -6,7 +6,8 @@ import {JoinEnvDto} from '../../dto/join-env.dto'
 export class EnvExistsPipe implements PipeTransform {
   constructor(
     @Inject('EnvironmentService') private readonly environmentService: EnvironmentService
-  ) {}
+  ) {
+  }
 
   public transform(
     joinEnvDto: JoinEnvDto,

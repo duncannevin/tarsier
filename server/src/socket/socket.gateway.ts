@@ -34,7 +34,7 @@ export class SocketGateway {
     @ConnectedSocket() socket: Socket
   ) {
     this.logger.log(this.makeSocketLog('Initialize Environment', socket))
-    this.environmentService.initializeEnvironment({ socket })
+    this.environmentService.initializeEnvironment({socket})
     // no return here, environment service will emit
   }
 
@@ -54,20 +54,20 @@ export class SocketGateway {
   afterInit(
     @ConnectedSocket() socket: Socket
   ) {
-    this.logger.log(this.makeSocketLog('Init', socket));
+    this.logger.log(this.makeSocketLog('Init', socket))
   }
 
   handleDisconnect(
     @ConnectedSocket() socket: Socket
   ) {
-    this.logger.log(this.makeSocketLog('Socket disconnect', socket));
+    this.logger.log(this.makeSocketLog('Socket disconnect', socket))
   }
 
   handleConnection(
     @ConnectedSocket() socket: Socket,
     ..._: any[]
   ) {
-    this.logger.log(this.makeSocketLog('Socket connected', socket));
+    this.logger.log(this.makeSocketLog('Socket connected', socket))
   }
 
   private makeSocketLog(msg: string, socket: Socket) {

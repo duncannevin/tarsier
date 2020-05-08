@@ -1,9 +1,9 @@
-import { Injectable, Logger, Scope } from '@nestjs/common'
+import {Injectable, Logger, Scope} from '@nestjs/common'
 import * as fs from 'fs'
-import { bindCallback } from 'rxjs'
+import {bindCallback} from 'rxjs'
 import {TarsierLoggerImpl} from './tarsier.logger.impl'
 
-@Injectable({ scope: Scope.TRANSIENT })
+@Injectable({scope: Scope.TRANSIENT})
 export class TarsierLogger extends Logger implements TarsierLoggerImpl {
   private readonly logLocation = '/var/log/tarsier.log'
 

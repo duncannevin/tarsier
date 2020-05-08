@@ -1,4 +1,4 @@
-import { handleError } from './index'
+import {handleError} from './index'
 import {TarsierLoggerMock} from '../mocks/logger/tarsier.logger.mock'
 import {ObservableMock} from '../mocks/observable.mock'
 

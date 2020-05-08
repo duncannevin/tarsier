@@ -4,10 +4,18 @@ import * as fs from 'fs'
 class MockLogger {
   context: string
 
-  setContext(context: string) { this.context = context}
-  debug(msg: string) {}
-  error(msg: string) {}
-  warn(msg: string) {}
+  setContext(context: string) {
+    this.context = context
+  }
+
+  debug(msg: string) {
+  }
+
+  error(msg: string) {
+  }
+
+  warn(msg: string) {
+  }
 }
 
 export class TarsierLoggerMock extends MockLogger implements TarsierLoggerImpl {

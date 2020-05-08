@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 import {AllowedClients} from './interface/allowed-clients.interface'
 
 export class Environment {
@@ -18,7 +18,8 @@ export class Environment {
     this.allowedClients[clientId] = true
   }
 
-  createImage() {}
+  createImage() {
+  }
 
   private generateId() {
     this.id = uuid()

@@ -7,6 +7,6 @@ export class ObservableMock<T> implements Subscribable<T> {
   subscribe(next: (value: T) => void, error: null | undefined, complete: () => void): Unsubscribable
   subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Unsubscribable
   subscribe(observer?: PartialObserver<T> | null | undefined | ((value: T) => void), error?: null | undefined | ((error: any) => void), complete?: () => void): Unsubscribable {
-    return undefined;
+    return undefined
   }
 }

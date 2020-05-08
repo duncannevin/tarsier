@@ -1,6 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import {Test, TestingModule} from '@nestjs/testing'
 import * as fs from 'fs'
-import { bindCallback } from 'rxjs'
+import {bindCallback} from 'rxjs'
 import {TarsierLogger} from './tarsier.logger'
 
 describe('LoggerService', () => {
@@ -10,10 +10,10 @@ describe('LoggerService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [TarsierLogger],
       exports: [TarsierLogger]
-    }).compile();
+    }).compile()
 
-    service = module.resolve<TarsierLogger>(TarsierLogger);
-  });
+    service = module.resolve<TarsierLogger>(TarsierLogger)
+  })
 
   beforeEach(() => {
     const mockers = {
@@ -23,7 +23,8 @@ describe('LoggerService', () => {
     appendFileSpy = jest.spyOn(fs, 'appendFile')
     appendFileSpy.mockImplementation(() => Promise.resolve)
     bindCallbackSpy = jest.spyOn(mockers, 'bc')
-    bindCallbackSpy.mockImplementation(() => {})
+    bindCallbackSpy.mockImplementation(() => {
+    })
   })
 
   afterEach(() => {
@@ -33,8 +34,8 @@ describe('LoggerService', () => {
   })
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+    expect(service).toBeDefined()
+  })
 
   it('should have set context method', async () => {
     const instance = await service
@@ -66,4 +67,4 @@ describe('LoggerService', () => {
     instance.debug(msg)
     expect(fs.appendFile).toHaveBeenCalled()
   })
-});
+})

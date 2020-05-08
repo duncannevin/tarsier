@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common'
 import {Environment} from './environment'
 import {EventEnum} from '../enum/event.enum'
 import {JoinEnvDto} from '../dto/join-env.dto'
@@ -9,7 +9,7 @@ import {Socket} from 'socket.io'
 export class EnvironmentService {
   private environments = {}
 
-  initializeEnvironment({ socket }: {socket: Socket}) {
+  initializeEnvironment({socket}: { socket: Socket }) {
     const clientId = socket.handshake.headers['client-id']
     const environment = new Environment(clientId)
 
@@ -18,7 +18,7 @@ export class EnvironmentService {
     socket.emit(EventEnum.ENVIRONMENT, environment)
   }
 
-  joinEnvironment({ environmentId, socket }: JoinEnvDto) {
+  joinEnvironment({environmentId, socket}: JoinEnvDto) {
     const clientId = socket.handshake.headers['client-id']
     const environment: Environment = this.environments[environmentId]
 

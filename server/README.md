@@ -34,6 +34,11 @@
 $ npm install
 ```
 
+## Initialize MongoDB Databases and Users
+```bash
+$ npm run db:init
+```
+
 ## Running the app
 
 ```bash

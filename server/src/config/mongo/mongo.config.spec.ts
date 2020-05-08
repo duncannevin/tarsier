@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { MongoConfig } from './mongo.service';
+import {Test, TestingModule} from '@nestjs/testing'
+import {MongoConfig} from './mongo.service'
 
 describe('MongoService', () => {
-  let service: MongoConfig;
+  let service: MongoConfig
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MongoConfig],
-    }).compile();
+      providers: [MongoConfig]
+    }).compile()
 
-    service = module.get<MongoConfig>(MongoConfig);
-  });
+    service = module.get<MongoConfig>(MongoConfig)
+  })
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+    expect(service).toBeDefined()
+  })
+})

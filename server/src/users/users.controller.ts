@@ -6,7 +6,6 @@ import {CreateUserDto} from './dto/create-user.dto'
 import {LoginUserDto} from './dto/login-user.dto'
 import {JwtAuthGuard} from '../guards/jwt-auth.guard'
 import {IsSameUserGuard} from '../guards/is-same-user.guard'
-import {User} from '../dto/user.dto'
 
 @Controller('users')
 export class UsersController {

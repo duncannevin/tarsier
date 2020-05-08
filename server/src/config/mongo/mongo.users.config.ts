@@ -3,7 +3,7 @@ export class MongoUsersConfig {
   DATABASE: string
   ENTITIES: string[]
 
-  constructor({ name, database, entities }) {
+  constructor({name, database, entities}) {
     this.NAME = name
     this.DATABASE = database
     this.ENTITIES = entities

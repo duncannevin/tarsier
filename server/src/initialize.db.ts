@@ -1,4 +1,4 @@
-import { exec } from 'child_process'
+import {exec} from 'child_process'
 import {MongoConfig} from './config/mongo/mongo.config'
 import {bindCallback, Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'

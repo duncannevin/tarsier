@@ -1,0 +1,6 @@
+auth:
+  secret: TARSIER_JWT_SECRET
+mongo:
+  port: TARSIER_MONGO_PORT,
+  username: TARSIER_MONGO_USERNAME,
+  password: TARSIER_MONGO_PW,

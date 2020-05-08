@@ -7,5 +7,5 @@ export class ServerConfig {
 
   HOST: string = this.serverConf.host
   NAME: string = this.serverConf.name
-  PORT: number = Number(this.serverConf.port)
+  PORT = Number(this.serverConf.port)
 }

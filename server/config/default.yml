@@ -1,0 +1,8 @@
+mongo:
+  port: 'please add ${TARSIER_MONGO_PORT} to your environment',
+  username: 'please add ${TARSIER_MONGO_USERNAME} to your environment',
+  password: 'please add ${TARSIER_MONGO_PW} to your environment',
+  users:
+    name: 'users',
+    database: 'tarsier_users',
+    entities: ['dist/users/**/*.entity{.ts,.js}']

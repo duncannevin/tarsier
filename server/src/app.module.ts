@@ -7,6 +7,9 @@ import {UsersModule} from './users/users.module'
 import {LoggerMiddleware} from './middleware/requestLogger.middleware'
 import {EnvironmentModule} from './environment/environment.module'
 import {EnvironmentService} from './environment/environment.service'
+import {MongoConfig} from './config/mongo/mongo.config'
+
+const mongoConfig: MongoConfig = new MongoConfig()
 
 @Module({
   imports: [
@@ -15,18 +18,15 @@ import {EnvironmentService} from './environment/environment.service'
     LoggerModule,
     ConfigModule,
     UsersModule,
-    // TODO: Move the common attributes to a shared constant once we start adding more databases
-    // The TypeORM Module does not support multiple connections in ormconfig.json yet
-    // Will need to define them all here for now :(
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      port: 27017,
-      username: 'tarsier',
-      password: 'tarsier',
+      port: mongoConfig.PORT,
+      username: mongoConfig.USERNAME,
+      password: mongoConfig.PASSWORD,
       synchronize: true,
-      name: 'users',
-      database: 'tarsier_users',
-      entities: ['dist/users/**/*.entity{.ts,.js}']
+      name: mongoConfig.USERS.NAME,
+      database: mongoConfig.USERS.DATABASE,
+      entities: mongoConfig.USERS.ENTITIES
     })
   ],
     controllers: [],

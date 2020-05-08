@@ -1,10 +1,11 @@
-import {Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common'
+import {Controller, Delete, Get, Param, Post, Req, UseGuards} from '@nestjs/common'
 import {UsersService} from './users.service'
-import {User} from './user.entity'
+import {UserEntity} from './user.entity'
 import {Body} from '@nestjs/common/decorators/http/route-params.decorator'
 import {CreateUserDto} from './dto/create-user.dto'
 import {LoginUserDto} from './dto/login-user.dto'
-import {JwtAuthGuard} from './jwt-auth.guard'
+import {JwtAuthGuard} from '../guards/jwt-auth.guard'
+import {IsSameUserGuard} from '../guards/is-same-user.guard'
 
 @Controller('users')
 export class UsersController {
@@ -15,27 +16,29 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(): Promise<User[]> {
+  findAll(): Promise<UserEntity[]> {
     return this.usersService.findAll()
   }
 
+  @UseGuards(JwtAuthGuard, IsSameUserGuard)
   @Get('/:id')
-  findOne(@Param('id') id): Promise<User> {
+  findOne(@Param('id') id): Promise<UserEntity> {
     return this.usersService.findOne(id)
   }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  create(@Body() createUserDto: CreateUserDto): Promise<boolean> {
     return this.usersService.create(createUserDto)
   }
 
+  @UseGuards(JwtAuthGuard, IsSameUserGuard)
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.usersService.remove(id)
   }
 
   @Post('/login')
-  login(@Body() loginUserDto: LoginUserDto): Promise<object | boolean> {
+  login(@Body() loginUserDto: LoginUserDto): Promise<any> {
     return this.usersService.login(loginUserDto)
   }
 }

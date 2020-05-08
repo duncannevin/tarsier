@@ -7,13 +7,14 @@ import {
 } from '@nestjs/websockets'
 import {Server, Socket} from 'socket.io'
 import {TarsierLogger} from '../logger/tarsier.logger'
-import {UseFilters, UsePipes} from '@nestjs/common'
+import {UseFilters, UseGuards, UsePipes} from '@nestjs/common'
 import {InitializeValidationPipe} from './pipe/initialize.validation.pipe'
 import {WsExceptionFilter} from './filter/ws.exception.filter'
 import {EnvironmentService} from '../environment/environment.service'
 import {EventEnum} from '../enum/event.enum'
 import {JoinEnvDto} from '../dto/join-env.dto'
 import {EnvExistsPipe} from './pipe/env.exists.pipe'
+import {JwtAuthGuard} from '../guards/jwt-auth.guard'
 
 @WebSocketGateway()
 export class SocketGateway {
@@ -27,6 +28,7 @@ export class SocketGateway {
     logger.setContext('SocketGateway')
   }
 
+  @UseGuards(JwtAuthGuard)
   @UseFilters(WsExceptionFilter)
   @SubscribeMessage(EventEnum.INITIALIZE_ENVIRONMENT)
   @UsePipes(InitializeValidationPipe)
@@ -38,6 +40,7 @@ export class SocketGateway {
     // no return here, environment service will emit
   }
 
+  @UseGuards(JwtAuthGuard)
   @UseFilters(WsExceptionFilter)
   @SubscribeMessage(EventEnum.JOIN_ENVIRONMENT)
   @UsePipes(EnvExistsPipe)
@@ -71,7 +74,7 @@ export class SocketGateway {
   }
 
   private makeSocketLog(msg: string, socket: Socket) {
-    let msgBase = `[socketId-${socket.id}] ${msg}`
+    const msgBase = `[socketId-${socket.id}] ${msg}`
 
     return prependClientId(msgBase, socket)
 

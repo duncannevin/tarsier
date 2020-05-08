@@ -29,13 +29,13 @@ const mongoConfig: MongoConfig = new MongoConfig()
       entities: mongoConfig.USERS.ENTITIES
     })
   ],
-    controllers: [],
-    providers: [EnvironmentService],
-    exports: [EnvironmentService]
-  })
-  export class AppModule {
-    configure(consumer: MiddlewareConsumer) {
-      consumer.apply(LoggerMiddleware)
-        .forRoutes('/');
-    }
+  controllers: [],
+  providers: [EnvironmentService],
+  exports: [EnvironmentService]
+})
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware)
+      .forRoutes('/')
   }
+}

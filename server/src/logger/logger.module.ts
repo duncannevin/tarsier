@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { TarsierLogger } from './tarsier.logger';
+import {Module} from '@nestjs/common'
+import {TarsierLogger} from './tarsier.logger'
 
 @Module({
   providers: [TarsierLogger],
-  exports: [TarsierLogger],
+  exports: [TarsierLogger]
 })
-export class LoggerModule {}
+export class LoggerModule {
+}

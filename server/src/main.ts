@@ -13,17 +13,17 @@ function bootstrap() {
   from(NestFactory.create(AppModule))
     .pipe(
       catchError(handleError(logger)),
-      map( app => {
+      map(app => {
         return {
           app,
           serverConfig: app.get('ServerConfig') as ServerConfig
         }
       }),
-      switchMap(({ app, serverConfig }) => {
+      switchMap(({app, serverConfig}) => {
         return from(app.listen(serverConfig.PORT))
-          .pipe(map(() => ({ app, serverConfig })))
+          .pipe(map(() => ({app, serverConfig})))
       })
-    ).subscribe(({ serverConfig }) => logger.log(`${serverConfig.NAME} listening on port ${serverConfig.PORT}`))
+    ).subscribe(({serverConfig}) => logger.log(`${serverConfig.NAME} listening on port ${serverConfig.PORT}`))
 }
 
 bootstrap()

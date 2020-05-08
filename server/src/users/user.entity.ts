@@ -1,12 +1,11 @@
 import {Entity, Column, ObjectIdColumn, ObjectID, BeforeInsert} from 'typeorm'
+import {JwtService} from '@nestjs/jwt'
 import * as crypto from 'crypto'
+import {User} from '../dto/user.dto'
+import {UnauthorizedException} from '@nestjs/common'
 
 @Entity()
-export class User {
-
-  constructor() {
-  }
-
+export class UserEntity {
   @ObjectIdColumn()
   id: ObjectID
 
@@ -40,14 +39,13 @@ export class User {
 
   private generatePasswordHash = (password, salt): string => crypto.createHmac('sha256', salt).update(password).digest('hex')
 
-  verifyPassword = (password, salt, passwordHash): boolean => this.generatePasswordHash(password, salt) === passwordHash
+  verifyPassword(reqPassword): boolean {
+    if (!(this.generatePasswordHash(reqPassword, this.salt) === this.password)) throw new UnauthorizedException()
 
-  getPublicInfo = (): object => {
-    return {
-      id: this.id.toString(),
-      username: this.username,
-      firstName: this.firstName,
-      lastName: this.lastName
-    }
+    return true
+  }
+
+  getPublicInfo(): User {
+    return new User(this)
   }
 }

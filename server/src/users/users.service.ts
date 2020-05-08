@@ -1,34 +1,35 @@
-import {BadRequestException, Injectable, InternalServerErrorException} from '@nestjs/common'
-import {JwtService} from '@nestjs/jwt'
+import {BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException} from '@nestjs/common'
 import {InjectRepository} from '@nestjs/typeorm'
 import {Repository} from 'typeorm'
-import {User} from './user.entity'
+import {UserEntity} from './user.entity'
 import {CreateUserDto} from './dto/create-user.dto'
 import {LoginUserDto} from './dto/login-user.dto'
 import {TarsierLogger} from '../logger/tarsier.logger'
+import {JwtService} from '@nestjs/jwt'
+import {updateFileWithText} from 'ts-loader/dist/servicesHost'
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User, 'users')
-    private usersRepository: Repository<User>,
-    private readonly jwtService: JwtService,
-    private logger: TarsierLogger
+    @InjectRepository(UserEntity, 'users')
+    private usersRepository: Repository<UserEntity>,
+    private logger: TarsierLogger,
+    private readonly jwtService: JwtService
   ) {
     logger.setContext('UsersService')
   }
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find().then((users: User[]) => {
+  findAll(): Promise<UserEntity[]> {
+    return this.usersRepository.find().then((users: UserEntity[]) => {
       return users
     })
   }
 
-  findOne(id: string): Promise<User> {
+  findOne(id: string): Promise<UserEntity> {
     return this.usersRepository.findOne(id)
   }
 
-  findByUsername(username: string): Promise<User> {
+  findByUsername(username: string): Promise<UserEntity> {
     return this.usersRepository.findOne({
       where: {
         username: username
@@ -56,20 +57,18 @@ export class UsersService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    return this.findByUsername(loginUserDto.username).then((user) => {
-      if (user.verifyPassword(loginUserDto.password, user.salt, user.password)) {
-        const userObj: object = user.getPublicInfo()
-        try {
-          const jwt: string = this.jwtService.sign(userObj)
-          userObj['jwt'] = jwt
-          return userObj
-        } catch (e) {
-          console.log(e)
-        }
-      } else {
-        return false
+    try {
+      const user: UserEntity = await this.findByUsername(loginUserDto.username)
+      user.verifyPassword(loginUserDto.password)
+      const jwt = this.jwtService.sign({...user.getPublicInfo()})
+      return {...user.getPublicInfo(), jwt}
+    } catch (e) {
+
+      if (e.status === 401) {
+        throw e
       }
 
-    }).catch(() => false)
+      throw new InternalServerErrorException()
+    }
   }
 }

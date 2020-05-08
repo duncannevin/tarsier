@@ -4,7 +4,7 @@ import {User} from './user.entity'
 import {Body} from '@nestjs/common/decorators/http/route-params.decorator'
 import {CreateUserDto} from './dto/create-user.dto'
 import {LoginUserDto} from './dto/login-user.dto'
-import {JwtAuthGuard} from './jwt-auth.guard'
+import {JwtAuthGuard} from '../guards/jwt-auth.guard'
 
 @Controller('users')
 export class UsersController {
@@ -25,7 +25,7 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  create(@Body() createUserDto: CreateUserDto): Promise<boolean> {
     return this.usersService.create(createUserDto)
   }
 

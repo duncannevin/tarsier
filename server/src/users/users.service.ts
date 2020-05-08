@@ -1,18 +1,21 @@
-import {Injectable} from '@nestjs/common'
+import {BadRequestException, Injectable, InternalServerErrorException} from '@nestjs/common'
 import {JwtService} from '@nestjs/jwt'
 import {InjectRepository} from '@nestjs/typeorm'
 import {Repository} from 'typeorm'
 import {User} from './user.entity'
 import {CreateUserDto} from './dto/create-user.dto'
 import {LoginUserDto} from './dto/login-user.dto'
+import {TarsierLogger} from '../logger/tarsier.logger'
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User, 'users')
     private usersRepository: Repository<User>,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private logger: TarsierLogger
   ) {
+    logger.setContext('UsersService')
   }
 
   findAll(): Promise<User[]> {
@@ -33,9 +36,19 @@ export class UsersService {
     })
   }
 
-  create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<boolean> {
     const user = this.usersRepository.create(createUserDto)
-    return this.usersRepository.save(user)
+    try {
+      await this.usersRepository.save(user)
+      return true
+    } catch (e) {
+
+      if (e.code && e.code === 11000) {
+        throw new BadRequestException()
+      }
+
+      throw new InternalServerErrorException()
+    }
   }
 
   async remove(id: string): Promise<void> {
@@ -45,7 +58,7 @@ export class UsersService {
   async login(loginUserDto: LoginUserDto) {
     return this.findByUsername(loginUserDto.username).then((user) => {
       if (user.verifyPassword(loginUserDto.password, user.salt, user.password)) {
-        let userObj: object = user.getPublicInfo()
+        const userObj: object = user.getPublicInfo()
         try {
           const jwt: string = this.jwtService.sign(userObj)
           userObj['jwt'] = jwt

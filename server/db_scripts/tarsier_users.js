@@ -21,9 +21,9 @@ db.createUser(
 );
 
 // Clear out any existing collection data
-print('Dropping Collection user...');
-cursor = db.user.drop();
-print(cursor);
+// print('Dropping Collection user...');
+// cursor = db.user.drop();
+// print(cursor);
 
 // Create our test user
 print('Inserting a test user...');
@@ -37,4 +37,4 @@ db.user.insertOne({
 });
 
 cursor = db.user.findOne();
-printjson(cursor);
+// printjson(cursor);

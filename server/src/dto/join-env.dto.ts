@@ -1,8 +1,8 @@
-import {Socket} from 'socket.io'
 import {IsString} from 'class-validator'
+import {TarsierSocket} from '../socket/interface/TarsierSocket.interface'
 
 export class JoinEnvDto {
   @IsString()
   environmentId: string
-  socket?: Socket
+  socket?: TarsierSocket
 }

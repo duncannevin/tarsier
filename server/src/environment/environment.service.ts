@@ -3,14 +3,14 @@ import {Environment} from './environment'
 import {EventEnum} from '../enum/event.enum'
 import {JoinEnvDto} from '../dto/join-env.dto'
 import {WsException} from '@nestjs/websockets'
-import {Socket} from 'socket.io'
+import {TarsierSocket} from '../socket/interface/TarsierSocket.interface'
 
 @Injectable()
 export class EnvironmentService {
-  private environments = {}
+  private environments = new Map<string, Environment>()
 
-  initializeEnvironment({socket}: { socket: Socket }) {
-    const clientId = socket.handshake.headers['client-id']
+  initializeEnvironment({socket}: { socket: TarsierSocket }) {
+    const clientId = socket.user.id
     const environment = new Environment(clientId)
 
     this.environments[environment.id] = environment
